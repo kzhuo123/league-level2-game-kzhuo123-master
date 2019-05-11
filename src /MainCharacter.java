@@ -5,12 +5,21 @@ public class MainCharacter extends GameObject {
 	int speed = 8;
 	boolean up = false;
 	boolean down = false;
+	int frame=0;
+	int framecounter=0;
 
 	MainCharacter(int x, int y, int width, int height) {
 		super(x, y, width, height);
 	}
 
 	void update() {
+		framecounter++;
+		if (framecounter%7==0) {
+			frame++;
+		}
+		if (frame>5) {
+			frame=0;
+		}
 		if (up) {
 			y+=speed;
 		}
@@ -22,7 +31,7 @@ public class MainCharacter extends GameObject {
 	}
 
 	void draw(Graphics g) {
-		g.drawImage(GamePanel.MainImg, x, y, width, height, null);
+		g.drawImage(GamePanel.wizard[frame], x, y, width, height, null);
 
 	}
 

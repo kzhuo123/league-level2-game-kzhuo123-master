@@ -13,20 +13,21 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
-	 public static BufferedImage alienImg;
+	public static BufferedImage[] bad;
+	
+	public static BufferedImage[] wizard;
 
-     public static BufferedImage MainImg;
+	public static BufferedImage[] bulletImg;
 
-     public static BufferedImage bulletImg;
-
-     public static BufferedImage spaceImg;
+	public static BufferedImage grass;
 	Timer timer;
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
 	int currentState = MENU_STATE;
-	MainCharacter bow = new MainCharacter(250, 750, 100, 100);
+	MainCharacter bow = new MainCharacter(250, 750, 120, 120);
 	
+
 	Font titleFont;
 	Font secondFont;
 	ObjectManager object = new ObjectManager(bow);
@@ -37,24 +38,37 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 		timer = new Timer(1000 / 60, this);
 		startGame();
-		 try {
+		try {
 
-            
+			wizard = new BufferedImage[6];
 
-             MainImg = ImageIO.read(this.getClass().getResourceAsStream("archer.png"));
+			for (int i = 1; i <= wizard.length; i++) {
+				
+				wizard[i-1] = ImageIO.read(this.getClass().getResourceAsStream("wizard"+i+".png"));
+			}
+			
+			bulletImg = new BufferedImage[3];
 
-             bulletImg = ImageIO.read(this.getClass().getResourceAsStream("arrow.png"));
+			for (int i = 1; i <= bulletImg.length; i++) {
+				bulletImg[i-1] = ImageIO.read(this.getClass().getResourceAsStream("fireball"+i+".png"));
+			}
+			
+			bad = new BufferedImage[4];
+			
+			for (int i = 1; i <= bad.length; i++) {
+				bad[i-1] = ImageIO.read(this.getClass().getResourceAsStream("bad"+i+".png"));
+			}
+			
+			grass = ImageIO.read(this.getClass().getResourceAsStream("grass.png"));
+			
 
-          
+		} catch (IOException e) {
 
-     } catch (IOException e) {
+			// TODO Auto-generated catch block
 
-             // TODO Auto-generated catch block
+			e.printStackTrace();
 
-             e.printStackTrace();
-
-     }
-
+		}
 
 	}
 
@@ -115,10 +129,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			}
 		}
 		if (e.getKeyCode() == e.VK_UP) {
-			bow.down=true;
+			bow.down = true;
 		}
 		if (e.getKeyCode() == e.VK_DOWN) {
-			bow.up=true;
+			bow.up = true;
 		}
 
 		if (e.getKeyCode() == e.VK_SPACE) {
@@ -127,8 +141,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 		}
 	}
-
-
 
 	void updateMenuState() {
 
@@ -154,7 +166,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("GAME", 10, 100);
 		g.setFont(secondFont);
 		g.drawString("Press ENTER to Start", 500, 300);
-		
+
 	}
 
 	void drawGameState(Graphics g) {
@@ -173,10 +185,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getKeyCode() == e.VK_UP) {
-			bow.down=false;
+			bow.down = false;
 		}
 		if (e.getKeyCode() == e.VK_DOWN) {
-			bow.up=false;
+			bow.up = false;
 		}
 	}
 

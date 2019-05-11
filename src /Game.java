@@ -21,6 +21,7 @@ public class Game {
 		frame.add(panel);
 		frame.addKeyListener(panel);
 		frame.getContentPane().setPreferredSize(new Dimension(width, height));
+		
 		frame.pack();
 	}
 

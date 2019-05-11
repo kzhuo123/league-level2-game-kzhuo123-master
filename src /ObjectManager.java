@@ -8,13 +8,14 @@ public class ObjectManager {
 	ArrayList<Enemy> aliens = new ArrayList<Enemy>();
 	boolean isAlive = true;
 	long enemyTimer = 0;
-	float enemySpawnTime = 1500;
+	float enemySpawnTime = 1250;
 
 	ObjectManager(MainCharacter bow) {
 		this.bow = bow;
 	}
 
 	void draw(Graphics g) {
+		 g.drawImage(GamePanel.grass, 0, 0, 1500, 1000, null);
 		bow.draw(g);
 		for (int i = 0; i < projectiles.size(); i++) {
 			projectiles.get(i).draw(g);
@@ -27,7 +28,7 @@ public class ObjectManager {
 
 	public void manageEnemies() {
 		if (System.currentTimeMillis() - enemyTimer >= enemySpawnTime) {
-			addEnemy(new Enemy(Game.width, new Random().nextInt(Game.height), 50, 50));
+			addEnemy(new Enemy(Game.width, new Random().nextInt(840), 160, 160));
 
 			enemyTimer = System.currentTimeMillis();
 		}
@@ -66,7 +67,7 @@ public class ObjectManager {
 			
 		}
 		for (int i = projectiles.size()-1; i >= 0; i--) {
-			if (projectiles.get(i).x > 1400) {
+			if (projectiles.get(i).x > 1500) {
 				projectiles.remove(i);
 			}
 			else if (projectiles.get(i).isAlive==false) {
