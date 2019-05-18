@@ -25,7 +25,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
 	int currentState = MENU_STATE;
-	MainCharacter bow = new MainCharacter(250, 750, 120, 120);
+	MainCharacter bow = new MainCharacter(250, 750, 200, 200);
 	
 
 	Font titleFont;
@@ -44,7 +44,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 			for (int i = 1; i <= wizard.length; i++) {
 				
-				wizard[i-1] = ImageIO.read(this.getClass().getResourceAsStream("wizard"+i+".png"));
+				wizard[i-1] = ImageIO.read(this.getClass().getResourceAsStream("knight"+i+".png"));
 			}
 			
 			bulletImg = new BufferedImage[3];
@@ -138,8 +138,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		if (e.getKeyCode() == e.VK_SPACE) {
 			object.addProjectile(new Projectile((bow.x + 25), bow.y, 50, 50));
 			System.out.println("space was pressed");
-
+			bow.isAttacking=true;
 		}
+		
+		
 	}
 
 	void updateMenuState() {
@@ -166,7 +168,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("GAME", 10, 100);
 		g.setFont(secondFont);
 		g.drawString("Press ENTER to Start", 500, 300);
-
+		
 	}
 
 	void drawGameState(Graphics g) {

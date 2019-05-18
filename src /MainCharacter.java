@@ -7,6 +7,7 @@ public class MainCharacter extends GameObject {
 	boolean down = false;
 	int frame=0;
 	int framecounter=0;
+	boolean isAttacking=false;
 
 	MainCharacter(int x, int y, int width, int height) {
 		super(x, y, width, height);
@@ -14,11 +15,12 @@ public class MainCharacter extends GameObject {
 
 	void update() {
 		framecounter++;
-		if (framecounter%7==0) {
+		if (framecounter%3==0&&isAttacking) {
 			frame++;
 		}
 		if (frame>5) {
 			frame=0;
+			isAttacking=false;
 		}
 		if (up) {
 			y+=speed;
