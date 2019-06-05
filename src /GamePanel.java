@@ -25,17 +25,20 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
 	int currentState = MENU_STATE;
+	int space=0;
 	MainCharacter bow = new MainCharacter(250, 750, 200, 200);
 	
 
 	Font titleFont;
 	Font secondFont;
+	Font bigFont;
 	ObjectManager object = new ObjectManager(bow);
 
 	GamePanel() {
 		titleFont = new Font("Arial", Font.PLAIN, 50);
 		secondFont = new Font("Arial", Font.PLAIN, 30);
-
+		bigFont = new Font("Arial", Font.PLAIN, 100);
+		
 		timer = new Timer(1000 / 60, this);
 		startGame();
 		try {
@@ -139,8 +142,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			object.addProjectile(new Projectile((bow.x + 25), bow.y, 50, 50));
 			System.out.println("space was pressed");
 			bow.isAttacking=true;
+			
 		}
-		
+		if (e.getKeyCode() == e.VK_SPACE &&currentState == GAME_STATE) {
+			space++;
+		}
 		
 	}
 
@@ -164,23 +170,36 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	void drawMenuState(Graphics g) {
 		g.setColor(Color.BLACK);
-		g.setFont(titleFont);
-		g.drawString("GAME", 10, 100);
+		g.setFont(bigFont);
+		g.drawString("DEFEND GAME", 300, 200);
+		g.setFont(bigFont);
+		g.drawString("Press ENTER to Start", 200, 500);
 		g.setFont(secondFont);
-		g.drawString("Press ENTER to Start", 500, 300);
+		g.drawString("Use arrow keys to move", 550, 700);
+		g.drawString("Use space to attack", 550, 800);
 		
 	}
 
 	void drawGameState(Graphics g) {
 		object.draw(g);
+		g.setColor(Color.WHITE);
+		g.setFont(titleFont);
+		g.drawString("Score= "+ object.getScore(), 550, 50);
+		g.drawString("Attacks used= "+ space, 550, 100);
 	}
 
 	void drawEndState(Graphics g) {
+		g.setColor(Color.RED);
+
+		g.fillRect(0, 0, Game.width, Game.height);
 		g.setColor(Color.BLACK);
-		g.setFont(titleFont);
-		g.drawString("GAME OVER", 100, 100);
-		g.setFont(secondFont);
-		g.drawString("Press ENTER to Restart", 100, 300);
+		g.setFont(bigFont);
+		g.drawString("GAME OVER", 400, 100);
+		g.drawString("Score= "+ object.getScore(), 450, 300);
+		g.drawString("Attacks used= "+ space, 450, 500);
+		
+		
+		
 	}
 
 	@Override

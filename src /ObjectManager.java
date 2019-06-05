@@ -9,7 +9,11 @@ public class ObjectManager {
 	boolean isAlive = true;
 	long enemyTimer = 0;
 	float enemySpawnTime = 1250;
+	int score=0;
 
+	public int getScore() {
+        return this.score;
+    }
 	ObjectManager(MainCharacter bow) {
 		this.bow = bow;
 	}
@@ -93,6 +97,7 @@ public class ObjectManager {
 				if (projectiles.collisionBox.intersects(a.collisionBox)) {
 					projectiles.isAlive = false;
 					a.isAlive = false;
+					score++;
 				}
 
 			}
