@@ -2,7 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class MainCharacter extends GameObject {
-	int speed = 9;
+	int speed = 11;
 	boolean up = false;
 	boolean down = false;
 	int frame=0;
