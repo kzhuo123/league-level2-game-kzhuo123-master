@@ -125,14 +125,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == 10) {
-			currentState += 1;
-			if (currentState > END_STATE) {
-
-				currentState = MENU_STATE;
-
-			}
+		if (e.getKeyCode() == 10&&currentState==0) {
+			currentState = GAME_STATE;
 		}
+			if (e.getKeyCode() == 10&&currentState==2) {
+				currentState = MENU_STATE;
+			
+		}
+		
 		if (e.getKeyCode() == e.VK_UP) {
 			bow.down = true;
 		}
@@ -181,6 +181,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setFont(secondFont);
 		g.drawString("Use arrow keys to move", 550, 700);
 		g.drawString("Use space to attack", 550, 800);
+		g.drawString("Don't let monsters get past or touch you", 450, 900);
 		
 	}
 
