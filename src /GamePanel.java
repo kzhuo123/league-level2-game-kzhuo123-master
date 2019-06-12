@@ -26,6 +26,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int END_STATE = 2;
 	int currentState = MENU_STATE;
 	int space=0;
+
 	
 	MainCharacter bow = new MainCharacter(250, 750, 200, 200);
 	
@@ -192,13 +193,17 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void drawEndState(Graphics g) {
+	
 		g.setColor(Color.RED);
 
 		g.fillRect(0, 0, Game.width, Game.height);
 		g.setColor(Color.BLACK);
 		g.setFont(bigFont);
 		g.drawString("GAME OVER", 400, 100);
-		g.drawString("Score= "+ object.getScore()*((float)object.getScore())/space, 450, 300);
+		if (object.getScore()==0) {
+			g.drawString("Score= 0" ,450, 300);
+		}
+		else g.drawString("Score= "+ object.getScore()*((float)object.getScore())/space, 450, 300);
 	
 		
 		
